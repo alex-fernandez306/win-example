@@ -22,19 +22,16 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)/obj/Release'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/win10-app-$(Build.BuildId).zip'
+    replaceExistingArchive: true
+    verbose: true
+
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)'
+    targetPath: '$(Build.SourcesDirectory)/obj/Release'
     artifact: 'win-example'
-
-- task: GitHubRelease@1
-  inputs:
-    gitHubConnection: 'Github Release'
-    repositoryName: '$(Build.Repository.Name)'
-    action: 'create'
-    target: '$(Build.SourceVersion)'
-    tagSource: 'gitTag'
-    changeLogCompareToRelease: 'lastFullRelease'
-    changeLogType: 'commitBased'
-    tag: $(draftReleaseTag)
-    assets: $(Build.ArtifactStagingDirectory)/*
