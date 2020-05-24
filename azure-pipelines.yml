@@ -37,12 +37,13 @@ steps:
     artifact: 'win-example'
 
 - task: GitHubRelease@1
+  condition: startsWith(variables['build.sourceBranch'], 'refs/tags/')
   inputs:
     gitHubConnection: 'Github Release'
     repositoryName: '$(Build.Repository.Name)'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'manual'
+    tagSource: 'userSpecifiedTag'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
     tag: $(draftReleaseTag)
