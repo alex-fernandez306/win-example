@@ -36,3 +36,5 @@ steps:
     tagSource: 'gitTag'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
+    tag: $(draftReleaseTag)
+    assets: $(Build.ArtifactStagingDirectory)/distributableBinaries/* 
