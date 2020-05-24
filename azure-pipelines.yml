@@ -24,7 +24,7 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/bin/Release'
+    rootFolderOrFile: '$(Build.SourcesDirectory)/bin/Release/*'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/win10-app-$(Build.BuildId).zip'
