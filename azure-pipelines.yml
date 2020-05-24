@@ -35,3 +35,15 @@ steps:
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)'
     artifact: 'win-example'
+
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'Github Release'
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'manual'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
+    tag: $(draftReleaseTag)
+    assets: '$(Build.SourcesDirectory)/bin/Release/*'
