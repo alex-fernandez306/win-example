@@ -1,6 +1,6 @@
 trigger:
-- master
-
+#- master
+- refs/tags/*
 pool:
   vmImage: 'windows-latest'
 
