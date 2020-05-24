@@ -27,7 +27,7 @@ steps:
     rootFolderOrFile: '$(Build.SourcesDirectory)/bin/Release/*'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/win10-app-$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/win10-app-$(tagName).zip'
     replaceExistingArchive: true
     verbose: true
 
@@ -46,5 +46,5 @@ steps:
     tagSource: 'userSpecifiedTag'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
-    tag: $(draftReleaseTag)
-    assets: '$(Build.SourcesDirectory)/bin/Release/*'
+    tag: $(tagName)
+    assets: '$(Build.ArtifactStagingDirectory)/*'
