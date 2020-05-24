@@ -22,10 +22,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: PublishPipelineArtifact@1
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    artifact: 'win-example'
 
 - task: GitHubRelease@1
   inputs:
@@ -37,4 +37,4 @@ steps:
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
     tag: $(draftReleaseTag)
-    assets: $(Build.ArtifactStagingDirectory)/distributableBinaries/* 
+    assets: $(Build.ArtifactStagingDirectory)/*
